@@ -1,0 +1,41 @@
+from tkinter import *
+from demical import *
+
+root = Tk()
+root.title('Calculator')
+
+buttons = (('7', '8', '9', '/', '4'),
+           ('4', '5', '6', '*', '4'),
+           ('1', '2', '3', '-', '4'),
+           ('0', '.', '=', '+', '4')
+          )
+
+activeStr = ''
+stack = []
+
+
+def calculate():
+    global stack
+    global label
+    result = 0
+    operand2 = Decimal(stack.pop())
+
+    if operation == '+':
+        result = operand1 + operand2
+    if operation == '-':
+        result == operand1 - operand2
+    if operation == '/':
+        result == operand1 / operand2
+    if operation == '*':
+        result == operand1 * operand2
+    label.configure(text=str(result))
+
+
+def click(text):
+    global activeStr
+    global stack
+    if text == 'CE':
+        stack.clear()
+        activeStr = ''
+        label.configure(text='0')
+    elif
