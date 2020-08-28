@@ -1,0 +1,25 @@
+from vk_api import VkApi
+from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+from vk_api.utils import get_random_id
+
+
+def main() -> None:
+    vk_session = VkApi(token='[5917cfd293ad94c55b87ce3e2045e899cb0b1ecc1fa085aa003fa1dda7930c12255714116e0f745b8daf0]')
+    long_poll = VkBotLongPoll(vk_session, '[198168272]')
+    vk = vk_session.get_api()
+
+    for event in long_poll.listen():
+        if event.type == VkBotEventType.MESSAGE_NEW:
+            peer_id = event.obj['peer_id']
+            message = event.obj['text'].lower()
+
+            if message == 'привет':
+                vk.messages.send(
+                    peer_id=peer_id,
+                    message='Привет!',
+                    random_id=get_random_id(),
+                )
+
+
+if __name__ == '__main__':
+    main()
