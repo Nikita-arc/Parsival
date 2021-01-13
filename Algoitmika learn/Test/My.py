@@ -1,9 +1,13 @@
-from time import *
+def new_func():
+    def Python_guru(python):
+        if python == "python_start" or python == "python_pro":
+            return True
+        else:
+            return False
+    teacher = input("Enter corses")
+    if Python_guru:
+        print("yes")
+    else:
+        print("no")
 
-start_time = time()
-phrase = input("напишите отзыв о нас: ")
-end_time = time()
-
-total_time = end_time - start_time
-symbols = len(phrase)
-print("Скорость печати:", symbols/total_time*60)
+return new_func()
