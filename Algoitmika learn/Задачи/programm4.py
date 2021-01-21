@@ -1,3 +1,4 @@
+teacher = str
 class Teacher(teacher):
     
     def teacher(self, teacher_name, teacher_courses):
