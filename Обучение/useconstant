@@ -1,9 +1,0 @@
-#File name : use constant
-i = 5
-print(i)
-i = i + 1
-print(i)
-
-s = '''Multistring.
-2) string.'''
-print(s)
