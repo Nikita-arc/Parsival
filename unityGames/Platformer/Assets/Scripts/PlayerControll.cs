@@ -5,12 +5,10 @@ using UnityEngine;
 public class PlayerControll : MonoBehaviour
 {
     public float speed;
-    public float jumpforse;
+    public float jumpforce;
     private float moveInput;
 
     private Rigidbody2D rb;
-
-    private bool facingRight = true;
 
     private bool facingRight = true;
 
@@ -19,8 +17,11 @@ public class PlayerControll : MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGround;
 
+    private Animator anim;
+
     private void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -36,11 +37,34 @@ public class PlayerControll : MonoBehaviour
         {
             Flip();
         }
+        if(moveInput == 0)
+        {
+            anim.SetBool("isrunning", false);
+        }
+        else
+        {
+            anim.SetBool("isrunning", true);
+        }
     }
 
     private void Update()
     {
-        isGrouded = Physics2D.OverlapCircle(feetPos.position, checkRadius, WhatIsGround);
+        isGrouded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+        
+        if(isGrouded == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = Vector2.up * jumpforce;
+            anim.SetTrigger("takeof");
+        }
+
+        if(isGrouded == true)
+        {
+            anim.SetBool("isjump", false);
+        }
+        else
+        {
+            anim.SetBool("isjump", true);
+        }
     }
 
     void Flip()
